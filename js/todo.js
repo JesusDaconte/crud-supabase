@@ -167,6 +167,40 @@ document.addEventListener('DOMContentLoaded', async () => {
         })
         .subscribe();
 
+    // Keep-Alive
+async function keepAlive() {
+  try {
+    // Opción 1: Consulta simple a nuestra tabla todos
+    const { data, error } = await supabase
+      .from('todos')
+      .select('id')
+      .limit(1);
+    
+    // Opción 2: Alternativa con fetch directo a la API REST
+    if (error) {
+      await fetch(`${supabaseUrl}/rest/v1/todos?select=id&limit=1`, {
+        headers: {
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`
+        }
+      });
+    }
+    
+    console.log('Keep-alive ejecutado:', new Date().toLocaleString());
+  } catch (err) {
+    console.error('Error en keep-alive:', err);
+  }
+}
+
+// Ejecutar al cargar la aplicación
+keepAlive();
+
+// Programar ejecución periódica (cada 5 días)
+const keepAliveInterval = setInterval(keepAlive, 5 * 24 * 60 * 60 * 1000);
+
+// Opcional: Detener el intervalo cuando no se necesite
+// clearInterval(keepAliveInterval);
+
     // Cargar tareas iniciales
     loadTasks();
 });
