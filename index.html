@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Lista de Tareas</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Mi Lista de Tareas</h1>
+        <button id="logout-btn">Cerrar Sesión</button>
+    </header>
+
+    <main>
+        <div class="todo-form">
+            <input type="text" id="new-task" placeholder="Nueva tarea...">
+            <button id="add-task">Agregar</button>
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">Todas</button>
+            <button class="filter-btn" data-filter="pending">Pendientes</button>
+            <button class="filter-btn" data-filter="completed">Completadas</button>
+        </div>
+
+        <ul id="tasks-list">
+            <!-- Las tareas se cargarán aquí -->
+        </ul>
+    </main>
+
+    <script type="module" src="js/todo.js"></script>
+</body>
+</html>
